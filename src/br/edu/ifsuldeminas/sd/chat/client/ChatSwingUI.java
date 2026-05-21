@@ -39,24 +39,20 @@ import br.edu.ifsuldeminas.sd.chat.ChatFactory;
 import br.edu.ifsuldeminas.sd.chat.MessageContainer;
 import br.edu.ifsuldeminas.sd.chat.Sender;
 
-/**
- * Interface Gráfica moderna para o Chat UDP.
- * Implementa MessageContainer conforme os requisitos da atividade.
- */
 public class ChatSwingUI extends JFrame implements MessageContainer {
 	private static final long serialVersionUID = 1L;
 
-	// Definição da paleta de cores (Tema Dark Moderno / Catppuccin Mocha inspirado)
-	private static final Color COLOR_BG = new Color(30, 30, 46);           // #1e1e2e
-	private static final Color COLOR_SURFACE = new Color(37, 37, 56);      // #252538
-	private static final Color COLOR_FIELD = new Color(49, 50, 68);        // #313244
-	private static final Color COLOR_BORDER = new Color(69, 71, 90);       // #45475a
-	private static final Color COLOR_TEXT = new Color(205, 214, 244);      // #cdd6f4
-	private static final Color COLOR_TEXT_MUTED = new Color(166, 173, 186); // #a6adba
-	private static final Color COLOR_PRIMARY = new Color(203, 166, 247);   // #cba6f7 (Purple/Lilac)
-	private static final Color COLOR_PRIMARY_HOVER = new Color(224, 204, 250); // Lighter lilac
-	private static final Color COLOR_GREEN = new Color(166, 227, 161);     // #a6e3a1
-	private static final Color COLOR_RED = new Color(243, 139, 168);       // #f38ba8
+	
+	private static final Color COLOR_BG = new Color(30, 30, 46);          
+	private static final Color COLOR_SURFACE = new Color(37, 37, 56);     
+	private static final Color COLOR_FIELD = new Color(49, 50, 68);       
+	private static final Color COLOR_BORDER = new Color(69, 71, 90);       
+	private static final Color COLOR_TEXT = new Color(205, 214, 244);      
+	private static final Color COLOR_TEXT_MUTED = new Color(166, 173, 186);
+	private static final Color COLOR_PRIMARY = new Color(203, 166, 247);  
+	private static final Color COLOR_PRIMARY_HOVER = new Color(224, 204, 250); 
+	private static final Color COLOR_GREEN = new Color(166, 227, 161);  
+	private static final Color COLOR_RED = new Color(243, 139, 168);    
 
 	// Componentes de Conexão
 	private JTextField localPortField;
@@ -87,24 +83,21 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		getContentPane().setBackground(COLOR_BG);
 		setLayout(new BorderLayout(0, 0));
 
-		// Inicializar Componentes de UI
+		
 		createConfigPanel();
 		createChatArea();
 		createMessageInputPanel();
-
-		// Inicia com foco no campo de porta local
+		
 		SwingUtilities.invokeLater(() -> localPortField.requestFocusInWindow());
 	}
 
-	/**
-	 * Cria a seção superior de configurações da conexão UDP.
-	 */
+	
 	private void createConfigPanel() {
 		JPanel topContainer = new JPanel(new BorderLayout());
 		topContainer.setBackground(COLOR_SURFACE);
 		topContainer.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, COLOR_BORDER));
 
-		// Painel de formulário usando GridBagLayout para alinhamento perfeito
+		
 		JPanel formPanel = new JPanel(new GridBagLayout());
 		formPanel.setBackground(COLOR_SURFACE);
 		formPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 10, 15));
@@ -113,7 +106,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(4, 8, 4, 8);
 
-		// Linha 1: Apelido e Porta Local
+		
 		JLabel lblNickname = new JLabel("Seu Apelido:");
 		styleLabel(lblNickname);
 		gbc.gridx = 0;
@@ -171,7 +164,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		gbc.weightx = 0.4;
 		formPanel.add(remotePortField, gbc);
 
-		// Botão Iniciar Conexão
+		
 		startButton = new JButton("Iniciar Chat");
 		styleButton(startButton, COLOR_PRIMARY, new Color(17, 17, 27), COLOR_PRIMARY_HOVER);
 		startButton.addActionListener(new ActionListener() {
@@ -181,14 +174,14 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 			}
 		});
 
-		// Adiciona o botão esticando pelas colunas da direita na próxima linha
+		
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 4;
 		gbc.insets = new Insets(12, 8, 4, 8);
 		formPanel.add(startButton, gbc);
 
-		// Painel de Status da Conexão
+		
 		JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
 		statusPanel.setBackground(COLOR_SURFACE);
 		statusPanel.setBorder(BorderFactory.createEmptyBorder(0, 23, 12, 15));
@@ -222,17 +215,15 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		add(topContainer, BorderLayout.NORTH);
 	}
 
-	/**
-	 * Cria a área central onde as mensagens de texto serão exibidas.
-	 */
+
 	private void createChatArea() {
 		chatTextPane = new JTextPane();
 		chatTextPane.setContentType("text/html");
 		chatTextPane.setEditable(false);
 		chatTextPane.setBackground(COLOR_BG);
-		chatTextPane.setCaretColor(COLOR_BG); // Oculta o cursor piscando ao clicar
+		chatTextPane.setCaretColor(COLOR_BG); 
 
-		// Configuração de estilos globais via StyleSheet
+		
 		HTMLDocument doc = (HTMLDocument) chatTextPane.getDocument();
 		StyleSheet styleSheet = doc.getStyleSheet();
 		styleSheet.addRule("body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #1e1e2e; color: #cdd6f4; margin: 12px; }");
@@ -252,9 +243,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		add(scrollPane, BorderLayout.CENTER);
 	}
 
-	/**
-	 * Cria a área inferior para escrita e envio de mensagens.
-	 */
+
 	private void createMessageInputPanel() {
 		JPanel bottomPanel = new JPanel(new BorderLayout(10, 0));
 		bottomPanel.setBackground(COLOR_BG);
@@ -298,16 +287,14 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
-	/**
-	 * Lógica de inicialização do Chat UDP por meio da API do professor.
-	 */
+	
 	private void startChat() {
 		String localPortStr = localPortField.getText().trim();
 		String remoteIp = remoteIpField.getText().trim();
 		String remotePortStr = remotePortField.getText().trim();
 		String nickname = nicknameField.getText().trim();
 
-		// Validações
+		
 		if (nickname.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Por favor, defina um apelido.", "Erro de Validação", JOptionPane.WARNING_MESSAGE);
 			return;
@@ -344,22 +331,22 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 			statusLabel.setText("Status: Conectando...");
 			statusIndicator.repaint();
 
-			// Constrói o sender e inicia o receiver integrado (passando esta view como MessageContainer)
+			
 			sender = ChatFactory.build(remoteIp, remotePort, localPort, this);
 
-			// Atualiza estado de conexão ativa
+			
 			isChatActive = true;
 			statusLabel.setText("Status: Ativo");
 			statusIndicator.repaint();
 
-			// Bloqueia alterações de configuração para evitar conflito de socket
+			
 			localPortField.setEditable(false);
 			remoteIpField.setEditable(false);
 			remotePortField.setEditable(false);
 			nicknameField.setEditable(false);
 			startButton.setEnabled(false);
 
-			// Habilita controles de envio
+			
 			messageInputField.setEnabled(true);
 			sendButton.setEnabled(true);
 			messageInputField.requestFocusInWindow();
@@ -374,9 +361,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		}
 	}
 
-	/**
-	 * Lógica de envio da mensagem digitada.
-	 */
+	
 	private void sendCurrentMessage() {
 		if (!isChatActive || sender == null) {
 			return;
@@ -392,13 +377,13 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 			fromName = "Usuário";
 		}
 
-		// Formata o payload de acordo com a regra da API (conteudo + separador + apelido)
+		
 		String payload = String.format("%s%s%s", text, MessageContainer.FROM, fromName);
 
 		try {
 			sender.send(payload);
 
-			// Adiciona mensagem localmente no chat com alinhamento à direita
+			
 			String timeStr = new SimpleDateFormat("HH:mm:ss").format(new Date());
 			String html = String.format(
 					"<div class='sent-box'>" +
@@ -411,7 +396,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 
 			appendHTML(html);
 
-			// Limpa e foca novamente
+			
 			messageInputField.setText("");
 			messageInputField.requestFocusInWindow();
 
@@ -420,13 +405,9 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		}
 	}
 
-	/**
-	 * Callback implementado da interface MessageContainer.
-	 * Chamado pela thread paralela da API do Chat (UDPReceiver).
-	 */
+	
 	@Override
 	public void newMessage(final String message) {
-		// Garante a execução na thread de despacho de eventos do Swing (Thread Safety)
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -435,9 +416,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		});
 	}
 
-	/**
-	 * Recebe e processa o texto bruto recebido do UDP socket.
-	 */
+
 	private void handleIncomingMessage(String message) {
 		if (message == null) {
 			return;
@@ -452,7 +431,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		String senderName = "Desconhecido";
 		String textBody = cleanMsg;
 
-		// Faz o parser do remetente
+		
 		if (cleanMsg.contains(MessageContainer.FROM)) {
 			String[] parts = cleanMsg.split(MessageContainer.FROM);
 			if (parts.length > 1) {
@@ -463,8 +442,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 			}
 		}
 
-		// Exibe mensagem recebida alinhada à esquerda
-		String timeStr = new SimpleDateFormat("HH:mm:ss").format(new Date());
+String timeStr = new SimpleDateFormat("HH:mm:ss").format(new Date());
 		String html = String.format(
 				"<div class='received-box'>" +
 						"  <span class='received-meta'>%s</span> " +
@@ -477,9 +455,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		appendHTML(html);
 	}
 
-	/**
-	 * Limpa a tela do chat e reinicia com uma mensagem de sistema.
-	 */
+	
 	private void clearChat() {
 		try {
 			HTMLDocument doc = (HTMLDocument) chatTextPane.getDocument();
@@ -489,7 +465,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		}
 	}
 
-	// Métodos Utilitários de Estilo
+	
 
 	private void styleLabel(JLabel label) {
 		label.setForeground(COLOR_TEXT_MUTED);
@@ -531,9 +507,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 		});
 	}
 
-	/**
-	 * Insere dinamicamente uma string HTML no final do JTextPane.
-	 */
+
 	private void appendHTML(String html) {
 		HTMLDocument doc = (HTMLDocument) chatTextPane.getDocument();
 		HTMLEditorKit kit = (HTMLEditorKit) chatTextPane.getEditorKit();
@@ -541,7 +515,7 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 			kit.insertHTML(doc, doc.getLength(), html, 0, 0, null);
 			chatTextPane.setCaretPosition(doc.getLength()); // Auto scroll para o final
 		} catch (Exception e) {
-			// fallback simples se der erro no kit HTML
+	
 			System.err.println("Erro ao renderizar mensagem: " + e.getMessage());
 		}
 	}
@@ -557,15 +531,12 @@ public class ChatSwingUI extends JFrame implements MessageContainer {
 				.replace("'", "&#x27;");
 	}
 
-	/**
-	 * Ponto de entrada para execução da interface gráfica.
-	 */
+
 	public static void main(String[] args) {
-		// Ajusta para o visual nativo do sistema operacional (Windows/Linux/Mac)
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			// Mantém o padrão do Swing se falhar
 		}
 
 		SwingUtilities.invokeLater(new Runnable() {
